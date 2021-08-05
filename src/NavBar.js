@@ -1,32 +1,71 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import './NavBar.css';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'reactstrap';
-import './NavBar.css';
+import UserContext from './UserContext';
 
-function NavBar() {
+function NavBar({ logout }) {
+	const { currentUser } = useContext(UserContext);
+
+	function loggedInNavBar() {
+		return (
+			<div>
+				<Navbar expand="md">
+					<Nav className="navbar-nav ml-auto">
+						<NavItem className="nav-item mr-4">
+							<NavLink className="nav-link" to="/companies">
+								Companies
+							</NavLink>
+						</NavItem>
+						<NavItem className="nav-item mr-4">
+							<NavLink className="nav-link" to="/jobs">
+								Jobs
+							</NavLink>
+						</NavItem>
+						<NavItem className="nav-item mr-4">
+							<NavLink className="nav-link" to="/profile">
+								Profile
+							</NavLink>
+						</NavItem>
+						<NavItem className="nav-item mr-4">
+							<NavLink className="nav-link" to="/" onClick={logout}>
+								Log out {currentUser.username}
+							</NavLink>
+						</NavItem>
+					</Nav>
+				</Navbar>
+			</div>
+		);
+	}
+
+	function loggedOutNavBar() {
+		return (
+			<div>
+				<Navbar expand="md">
+					<Nav className="navbar-nav ml-auto">
+						<NavItem className="nav-item mr-4">
+							<NavLink className="nav-link" to="/login">
+								Login
+							</NavLink>
+						</NavItem>
+						<NavItem className="nav-item mr-4">
+							<NavLink className="nav-link" to="/signup">
+								Sign Up {currentUser}
+							</NavLink>
+						</NavItem>
+					</Nav>
+				</Navbar>
+			</div>
+		);
+	}
+
 	return (
-		<div>
-			<Navbar expand="md">
-				<NavLink exact to="/">
-					JOBLY
-				</NavLink>
-				<Nav className="ml-auto">
-					<NavItem>
-						<NavLink to="/companies">Companies</NavLink>
-					</NavItem>
-					<NavItem>
-						<NavLink to="/jobs">Jobs</NavLink>
-					</NavItem>
-					{/* <NavItem>
-						<NavLink to="/profile">Profile</NavLink>
-					</NavItem>
-					<NavItem>
-						<NavLink to="/logout">Log Out</NavLink>
-					</NavItem> */}
-				</Nav>
-			</Navbar>
-		</div>
+		<nav>
+			<NavLink className="float-right" exact to="/">
+				JOBLY
+			</NavLink>
+			{currentUser ? loggedInNavBar() : loggedOutNavBar()}
+		</nav>
 	);
 }
-
 export default NavBar;

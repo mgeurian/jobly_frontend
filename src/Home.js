@@ -8,6 +8,7 @@ function Home() {
 				<CardBody className="text-center">
 					<CardTitle>
 						<h3 className="font-weight-bold">JOBLY</h3>
+						<h5>Find the job for you</h5>
 					</CardTitle>
 				</CardBody>
 			</Card>
