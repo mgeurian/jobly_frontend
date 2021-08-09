@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function SignupForm({ signup }) {
-	const history = useHistory();
+	let history = useHistory();
 
 	const INITIAL_STATE = {
 		username: '',
@@ -27,11 +27,9 @@ function SignupForm({ signup }) {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		let result = await signup(formData);
-		console.log(formData);
-		console.log(result);
 
 		if (result.success) {
-			history.push('./companies');
+			history.push('/profile');
 		} else {
 			setFormErrors(result.errors);
 			console.log(formErrors);

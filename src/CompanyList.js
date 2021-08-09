@@ -6,20 +6,19 @@ import CompanyCard from './CompanyCard';
 function CompanyList() {
 	const [ companies, setCompanies ] = useState([]);
 
-	useEffect(function getCompaniesOnMount() {
+	useEffect(() => {
 		search();
 	}, []);
 
 	async function search(name) {
 		let companies = await JoblyApi.getCompanies(name);
 		setCompanies(companies);
-		console.log(companies);
 	}
 
 	return (
-		<div className="container">
+		<div className="CompanyList container">
 			<SearchForm searchFor={search} />
-			{companies.length ? (
+			{companies && (
 				<div>
 					{companies.map((c) => (
 						<CompanyCard
@@ -31,8 +30,6 @@ function CompanyList() {
 						/>
 					))}
 				</div>
-			) : (
-				<h5>Sorry. No results found.</h5>
 			)}
 		</div>
 	);

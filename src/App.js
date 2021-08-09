@@ -18,12 +18,16 @@ function App() {
 	useEffect(
 		function loadUser() {
 			async function getCurrentUser() {
+				console.log(`is there a token ${token}`);
 				if (token) {
 					try {
+						console.log(token);
 						let { username } = jwt.decode(token);
+						console.log(username);
 						JoblyApi.token = token;
 						let currentUser = await JoblyApi.getUser(username);
 						setCurrentUser(currentUser);
+						console.log(currentUser);
 						setApplicationIds(new Set(currentUser.applications));
 					} catch (err) {
 						setCurrentUser(null);

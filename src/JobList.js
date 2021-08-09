@@ -6,7 +6,7 @@ import SearchForm from './SearchForm';
 function JobList() {
 	const [ jobs, setJobs ] = useState([]);
 
-	useEffect(function getAllJobsOnMount() {
+	useEffect(() => {
 		search();
 	}, []);
 
@@ -18,7 +18,7 @@ function JobList() {
 	return (
 		<div className="JobList container">
 			<SearchForm searchFor={search} />
-			<div>{jobs.map((job) => <JobCardList job={job} key={job.id} />)}</div>
+			<JobCardList jobs={jobs} />
 		</div>
 	);
 }

@@ -7,13 +7,12 @@ function CompanyDetail() {
 	const { handle } = useParams();
 
 	const [ company, setCompany ] = useState([]);
-	console.log(company);
 
 	useEffect(
-		function getCompanyDetailAndJobsOnMount() {
+		() => {
 			async function getCompany() {
-				let company = await JoblyApi.getCompany(handle);
-				setCompany(company);
+				let res = await JoblyApi.getCompany(handle);
+				setCompany(res);
 			}
 			getCompany();
 		},
@@ -21,7 +20,7 @@ function CompanyDetail() {
 	);
 
 	return (
-		<div className="CompanyDetail">
+		<div className="CompanyDetail col-md-8 offset-md-2">
 			<h2>{company.name}</h2>
 			<p>{company.description}</p>
 			<JobCardList jobs={company.jobs} />

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function LoginForm({ login }) {
-	const history = useHistory();
+	let history = useHistory();
 
 	const INITIAL_STATE = {
 		username: '',
@@ -24,8 +24,6 @@ function LoginForm({ login }) {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		let result = await login(formData);
-		console.log(formData);
-		console.log(result);
 
 		if (result.success) {
 			history.push('/companies');

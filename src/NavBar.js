@@ -50,7 +50,7 @@ function NavBar({ logout }) {
 						</NavItem>
 						<NavItem className="nav-item mr-4">
 							<NavLink className="nav-link" to="/signup">
-								Sign Up {currentUser}
+								Sign Up
 							</NavLink>
 						</NavItem>
 					</Nav>
