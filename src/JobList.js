@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import JobCardList from './JobCardList';
 import JoblyApi from './Api';
 import SearchForm from './SearchForm';
+import LoadingSpinner from './LoadingSpinner';
 
 function JobList() {
 	const [ jobs, setJobs ] = useState([]);
 
-	useEffect(() => {
+	useEffect(function getJobsOnMount() {
 		search();
 	}, []);
 
@@ -14,6 +15,8 @@ function JobList() {
 		let jobs = await JoblyApi.getJobs(title);
 		setJobs(jobs);
 	}
+
+	if (!jobs) return <LoadingSpinner />;
 
 	return (
 		<div className="JobList container">

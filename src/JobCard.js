@@ -14,17 +14,15 @@ function JobCard({ job }) {
 	);
 
 	async function handleClick(e) {
-		e.preventDefault();
-		if (didApply(job.id)) {
-			return;
-		} else {
-			apply(job.id);
-			setApplied(true);
-		}
+		if (didApply(job.id)) return;
+		apply(job.id);
+		setApplied(true);
 	}
 
 	return (
 		<div className="JobCard">
+			{' '}
+			{applied}
 			{job && (
 				<Card>
 					<CardBody>

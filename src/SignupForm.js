@@ -29,7 +29,7 @@ function SignupForm({ signup }) {
 		let result = await signup(formData);
 
 		if (result.success) {
-			history.push('/profile');
+			history.push('/companies');
 		} else {
 			setFormErrors(result.errors);
 			console.log(formErrors);

@@ -3,9 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import UserContext from './UserContext';
 
 function PrivateRoute({ exact, path, children }) {
-	const { currentUser, setCurrentUser } = useContext(UserContext);
-	setCurrentUser(currentUser);
-	console.log(currentUser);
+	const { currentUser } = useContext(UserContext);
 
 	if (!currentUser) {
 		return <Redirect to="/login" />;

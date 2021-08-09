@@ -5,6 +5,7 @@ function SearchForm({ searchFor }) {
 	const [ searchTerm, setSearchTerm ] = useState('');
 	function handleSubmit(e) {
 		e.preventDefault();
+		console.log(searchTerm);
 		searchFor(searchTerm.trim() || undefined);
 		setSearchTerm(searchTerm.trim());
 	}
@@ -12,6 +13,7 @@ function SearchForm({ searchFor }) {
 	function handleChange(e) {
 		const { value } = e.target;
 		setSearchTerm(value);
+		console.log(e.target.value);
 	}
 
 	return (
