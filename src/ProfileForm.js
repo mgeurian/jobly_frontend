@@ -41,6 +41,7 @@ function ProfileForm() {
 			console.log(updatedUser);
 		} catch (errors) {
 			setFormErrors(errors);
+			console.log(formErrors);
 		}
 
 		setFormErrors([]);

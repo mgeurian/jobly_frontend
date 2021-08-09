@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SearchForm.css';
 
 function SearchForm({ searchFor }) {
 	const [ searchTerm, setSearchTerm ] = useState('');
@@ -14,8 +15,8 @@ function SearchForm({ searchFor }) {
 	}
 
 	return (
-		<div>
-			<form className="form-inline" onnSubmit={handleSubmit}>
+		<div className="container">
+			<form className="form-inline input-group" onSubmit={handleSubmit}>
 				<input
 					className="form-control"
 					name="searchTerm"
@@ -23,7 +24,6 @@ function SearchForm({ searchFor }) {
 					value={searchTerm}
 					onChange={handleChange}
 				/>
-
 				<button type="submit" className="btn btn-primary">
 					Submit
 				</button>

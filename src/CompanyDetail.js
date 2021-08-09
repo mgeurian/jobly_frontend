@@ -1,21 +1,32 @@
-import React from 'react';
-import JobList from './JobList';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import JoblyApi from './Api';
+import JobCardList from './JobCardList';
 
-function Company({ company }) {
-	// in the div below, need elements for name, logo_url, and description
-	// need num_employees and handle as keys/props
+function CompanyDetail() {
+	const { handle } = useParams();
+
+	const [ company, setCompany ] = useState([]);
+	console.log(company);
+
+	useEffect(
+		function getCompanyDetailAndJobsOnMount() {
+			async function getCompany() {
+				let company = await JoblyApi.getCompany(handle);
+				setCompany(company);
+			}
+			getCompany();
+		},
+		[ handle ]
+	);
 
 	return (
-		<div>
-			<header>
-				<h2>{company.name}</h2>
-				<p>{company.description}</p>
-			</header>
-			<section>
-				<JobList jobs={company.jobs} />
-			</section>
+		<div className="CompanyDetail">
+			<h2>{company.name}</h2>
+			<p>{company.description}</p>
+			<JobCardList jobs={company.jobs} />
 		</div>
 	);
 }
 
-export default Company;
+export default CompanyDetail;

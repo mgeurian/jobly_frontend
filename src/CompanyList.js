@@ -4,33 +4,36 @@ import SearchForm from './SearchForm';
 import CompanyCard from './CompanyCard';
 
 function CompanyList() {
-	const [ companies, setCompanies ] = useState(null);
+	const [ companies, setCompanies ] = useState([]);
 
 	useEffect(function getCompaniesOnMount() {
 		search();
 	}, []);
 
-	async function search() {
-		let companies = await JoblyApi.getCompanies();
+	async function search(name) {
+		let companies = await JoblyApi.getCompanies(name);
 		setCompanies(companies);
 		console.log(companies);
 	}
-	if (companies) {
-		console.log(companies);
-	} else {
-		console.log('no companies retrieved');
-	}
 
 	return (
-		<div>
-			<div>
-				<SearchForm />
-				{companies.length ? (
-					<div>{companies.map((company) => <CompanyCard company={company} />)}</div>
-				) : (
-					<h5>Sorry. No results found.</h5>
-				)}
-			</div>
+		<div className="container">
+			<SearchForm searchFor={search} />
+			{companies.length ? (
+				<div>
+					{companies.map((c) => (
+						<CompanyCard
+							key={c.handle}
+							handle={c.handle}
+							name={c.name}
+							description={c.description}
+							logoUrl={c.logoUrl}
+						/>
+					))}
+				</div>
+			) : (
+				<h5>Sorry. No results found.</h5>
+			)}
 		</div>
 	);
 }

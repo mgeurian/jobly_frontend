@@ -16,24 +16,31 @@ function Routes({ login, signup }) {
 				<Route exact path="/">
 					<Home />
 				</Route>
+
 				<Route exact path="/signup">
 					<SignupForm signup={signup} />
 				</Route>
+
 				<Route exact path="/login">
 					<LoginForm login={login} />
 				</Route>
+
 				<PrivateRoute exact path="/companies">
 					<CompanyList />
 				</PrivateRoute>
-				<PrivateRoute exact path="/company/:handle">
+
+				<PrivateRoute exact path="/companies/:handle">
 					<CompanyDetail />
 				</PrivateRoute>
+
 				<PrivateRoute exact path="/jobs">
 					<JobList />
 				</PrivateRoute>
+
 				<PrivateRoute exact path="/profile">
 					<ProfileForm />
 				</PrivateRoute>
+
 				<Redirect to="/" />
 			</Switch>
 		</div>
